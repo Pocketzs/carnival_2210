@@ -17,6 +17,7 @@ class Ride
   end
 
   def board_rider(visitor)
+    return unless visitor.preferences.include?(@excitement)
     @rider_log[visitor] += 1
     visitor.spending_money -= @admission_fee
     @total_revenue += @admission_fee
