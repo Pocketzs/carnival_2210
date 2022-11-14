@@ -5,12 +5,19 @@ describe Visitor do
   describe '#initialize' do
     it 'exists and has attributes' do
       visitor1 = Visitor.new('Bruce', 54, '$10')
+      visitor2 = Visitor.new('Tucker', 36, '$5')
 
       expect(visitor1).to be_a Visitor
       expect(visitor1.name).to eq 'Bruce'
       expect(visitor1.height).to eq 54
       expect(visitor1.spending_money).to eq 10
       expect(visitor1.preferences).to eq []
+
+      expect(visitor2).to be_a Visitor
+      expect(visitor2.name).to eq 'Tucker'
+      expect(visitor2.height).to eq 36
+      expect(visitor2.spending_money).to eq 5
+      expect(visitor2.preferences).to eq []
     end
   end
 
