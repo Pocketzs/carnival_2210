@@ -59,5 +59,26 @@ describe Ride do
 
       expect(ride1.total_revenue).to eq 3
     end
+
+    it 'does not board a visitor is they are not tall enough' do
+      ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+      visitor1 = Visitor.new('Bruce', 54, '$10')
+      visitor3 = Visitor.new('Penny', 64, '$15')
+      visitor1.add_preference(:gentle)
+      visitor3.add_preference(:gentle)
+      visitor3.add_preference(:thrilling)
+
+      expect(visitor1.preferences).to eq [:gentle]
+      expect(visitor3.preferences).to eq [:gentle, :thrilling]
+      expect(ride3.excitement).to eq :thrilling
+
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor3)
+
+      expect(visitor1.spending_money).to eq 10
+      expect(visitor3.spending_money).to eq 13
+
+      expect(ride3.rider_log).to eq({visitor3 => 1})
+    end
   end
 end
