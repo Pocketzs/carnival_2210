@@ -13,4 +13,15 @@ describe Visitor do
       expect(visitor1.preferences).to eq []
     end
   end
+
+  describe '#add_preference' do
+    it 'can add preferences' do
+      visitor1 = Visitor.new('Bruce', 54, '$10')
+
+      visitor1.add_preference(:gentle)
+      visitor1.add_preference(:water)
+
+      expect(visitor1.preferences).to eq [:gentle, :water]
+    end
+  end
 end
