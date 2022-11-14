@@ -40,7 +40,7 @@ describe Ride do
       expect(ride1.rider_log).to eq({visitor1 => 2, visitor2 => 1})
     end
 
-    it 'reduces the riders spending money by the admission fee' do
+    it 'reduces the riders spending money and increases total revenue by the admission fee' do
       ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
       visitor1 = Visitor.new('Bruce', 54, '$10')
       visitor2 = Visitor.new('Tucker', 36, '$5')
