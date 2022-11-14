@@ -50,4 +50,29 @@ describe Carnival do
       expect(carnival.total_revenue).to eq 29
     end
   end
+
+  describe '#most_popular_ride' do
+    it 'calculates the most popular ride based on total times rode' do
+      ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
+      ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+      carnival = Carnival.new({start: '2022-11-11', end: '2022-11-13', rides: [ride1, ride3]})
+
+      visitor1 = Visitor.new('Bruce', 54, '$10')
+      visitor2 = Visitor.new('Tucker', 54, '$5')
+      visitor3 = Visitor.new('Penny', 64, '$14')
+
+      visitor1.add_preference(:gentle)
+      visitor2.add_preference(:thrilling)
+      visitor3.add_preference(:thrilling)
+
+      7.times {ride1.board_rider(visitor1)}
+      7.times {ride3.board_rider(visitor3)}
+      ride3.board_rider(visitor2)
+
+      expect(ride1.total_times_ridden).to eq 7
+      expect(ride3.total_times_ridden).to eq 8
+
+      expect(carnival.most_popular_ride).to eq ride3
+    end
+  end
 end
