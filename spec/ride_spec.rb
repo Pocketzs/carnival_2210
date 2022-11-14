@@ -60,7 +60,7 @@ describe Ride do
       expect(ride1.total_revenue).to eq 3
     end
 
-    it 'does not board a visitor is they dont have a matching preference' do
+    it 'does not board a visitor if they dont have a matching preference' do
       ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
       visitor1 = Visitor.new('Bruce', 54, '$10')
       visitor3 = Visitor.new('Penny', 64, '$15')
@@ -79,6 +79,20 @@ describe Ride do
       expect(visitor3.spending_money).to eq 13
 
       expect(ride3.rider_log).to eq({visitor3 => 1})
+    end
+
+    it 'does not board a visitor if they are not tall enough' do
+      ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+      visitor2 = Visitor.new('Tucker', 36, '$5')
+      visitor2.add_preference(:thrilling)
+
+      expect(ride3.min_height).to eq 54
+      expect(visitor2.tall_enough?(54)).to be false
+
+      ride3.board_rider(visitor2)
+
+      expect(visitor2.spending_money).to eq 5
+      expect(ride3.rider_log).to eq({})
     end
   end
 end
