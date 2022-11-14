@@ -23,4 +23,31 @@ describe Carnival do
       expect(carnival.rides).to eq [ride1, ride2, ride3]
     end
   end
+
+  describe '#carnival_rides_total_revenue' do
+    it 'can calculate total revenue earned from all rides' do
+      ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
+      ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
+      ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+      carnival = Carnival.new({start: '2022-11-11', end: '2022-11-13', rides: [ride1, ride2, ride3]})
+
+      visitor1 = Visitor.new('Bruce', 54, '$10')
+      visitor2 = Visitor.new('Tucker', 36, '$5')
+      visitor3 = Visitor.new('Penny', 64, '$14')
+
+      visitor1.add_preference(:gentle)
+      visitor2.add_preference(:gentle)
+      visitor3.add_preference(:thrilling)
+
+      10.times {ride1.board_rider(visitor1)}
+      ride2.board_rider(visitor2)
+      7.times {ride3.board_rider(visitor3)}
+
+      expect(ride1.total_revenue).to eq 10
+      expect(ride2.total_revenue).to eq 5
+      expect(ride3.total_revenue).to eq 14
+
+      expect(carnival.carnival_rides_total_revenue).to eq 29
+    end
+  end
 end
