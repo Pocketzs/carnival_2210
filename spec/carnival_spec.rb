@@ -24,7 +24,7 @@ describe Carnival do
     end
   end
 
-  describe '#carnival_rides_total_revenue' do
+  describe '#total_revenue' do
     it 'can calculate total revenue earned from all rides' do
       ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
       ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
@@ -47,7 +47,7 @@ describe Carnival do
       expect(ride2.total_revenue).to eq 5
       expect(ride3.total_revenue).to eq 14
 
-      expect(carnival.carnival_rides_total_revenue).to eq 29
+      expect(carnival.total_revenue).to eq 29
     end
   end
 end

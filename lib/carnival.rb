@@ -14,7 +14,7 @@ class Carnival
     @rides = attributes[:rides] || []
   end
 
-  def carnival_rides_total_revenue
+  def total_revenue
     @rides.sum do |ride|
       ride.total_revenue
     end
