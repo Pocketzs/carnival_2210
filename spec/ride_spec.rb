@@ -60,7 +60,7 @@ describe Ride do
       expect(ride1.total_revenue).to eq 3
     end
 
-    it 'does not board a visitor is they are not tall enough' do
+    it 'does not board a visitor is they dont have a matching preference' do
       ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
       visitor1 = Visitor.new('Bruce', 54, '$10')
       visitor3 = Visitor.new('Penny', 64, '$15')
