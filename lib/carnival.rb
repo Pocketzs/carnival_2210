@@ -13,4 +13,10 @@ class Carnival
     @duration = "#{((Time.parse(@end)-Time.parse(@start))/86400).to_i} days"
     @rides = attributes[:rides] || []
   end
+
+  def carnival_rides_total_revenue
+    @rides.sum do |ride|
+      ride.total_revenue
+    end
+  end
 end
