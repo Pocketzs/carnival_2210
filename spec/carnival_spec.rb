@@ -5,10 +5,12 @@ describe Carnival do
   describe '#initialize' do
     it 'exists and has attributes' do
       carnival = Carnival.new({start: '2022-11-11', end: '2022-11-13'})
+      carnival2 = Carnival.new({start: '2022-11-8', end: '2022-11-13'})
 
       expect(carnival.start).to eq('2022-11-11')
       expect(carnival.end).to eq('2022-11-13')
       expect(carnival.duration).to eq '2 days'
+      expect(carnival2.duration).to eq '5 days'
       expect(carnival.rides).to eq []
     end
 
